@@ -50,7 +50,7 @@ def sanitize(line):
                 sanitized_allele = "0"
 
         sanitized_line[index] = sanitized_allele.replace(" ", "")
-    return(sanitized_line)
+    return sanitized_line
 
 
 def transform_alleles_table(input):
@@ -66,7 +66,7 @@ def transform_alleles_table(input):
                 allele_matrix.append(sanitized_line[1:])
             else:
                 loci_vector = line.replace("\n", "").split("\t")[1:]
-    return(samples_vector, loci_vector, allele_matrix)
+    return (samples_vector, loci_vector, allele_matrix)
 
 
 def make_matrix(input, output, outfmt):

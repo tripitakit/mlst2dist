@@ -36,10 +36,11 @@ The dissimilarity matrix output is saved to disk with default PHYLIP square matr
     S6	2	INF-8	3	PLOT3	PLOT5	3	INF-2	INF-1	INF-1
 
 
-### Dissimilarity matrix (PHYLIP squared matrix format)
+### Dissimilarity matrix (PHYLIP square matrix format)
 
     $ mlst2dist.py test_alleles.tsv test_dist.phy
     $ cat test_dist.phy
+    
     6
     S1        	0.0	0.66667	0.44444	0.66667	0.44444	0.88889
     S2        	0.66667	0.0	0.55556	0.66667	0.88889	0.77778

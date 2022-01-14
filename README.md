@@ -1,6 +1,6 @@
 # mlst2dist
 
-This program calculate a distance (dissimilarity) matrix from a chewBBACA results_alleles.tsv table.
+This program calculate a distance (dissimilarity) matrix from a chewBBACA (https://github.com/B-UMMI/chewBBACA) results_alleles.tsv table.
 
 It converts all occurrences of LNF, NIPH, PLOT3, PLOT5  with 0, all INF-X in the corresponding X inferred allele-calls and anything else that isn't an integer value into 0; then calculates a matrix of pairwise dissimilarities using the Hamming distances corrected for missing data. The dissimilarity matrix output is saved to disk with default PHYLIP square matrix format, or optional TSV format.
 
@@ -104,3 +104,5 @@ It converts all occurrences of LNF, NIPH, PLOT3, PLOT5  with 0, all INF-X in the
     $ cat outtree
     ((((S1:0.22222,S5:0.22222):0.06945,(S3:0.16667,S4:0.16667):0.12500):0.05556,
     S2:0.34722):0.04167,S6:0.38889);
+
+

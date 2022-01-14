@@ -37,7 +37,7 @@ def parse_args():
 def sanitize(line):
     sanitized_line = line.replace("\n", "").split("\t")
     for index, a in list(enumerate(sanitized_line))[1:]:
-        sanitized_allele = ""
+
         if "INF-" in a:
             sanitized_allele = a.replace("INF-", "")
         elif a in ["LNF", "PLOT3", "PLOT5", "NIPH", "NIPHEM", "ASM", "ALM", "LOTSC"]:

@@ -43,6 +43,7 @@ The dissimilarity matrix output is saved to disk with default PHYLIP square matr
 ### Dissimilarity matrix (PHYLIP square matrix format)
 
     $ mlst2dist.py test_alleles.tsv test_dist.phy
+
     Done. The dissimilarity matrix has been saved in test_dist.phy
 
     $ cat test_dist.phy
@@ -58,6 +59,7 @@ The dissimilarity matrix output is saved to disk with default PHYLIP square matr
 ### Dissimilarity matrix (TSV format)
 
     $ mlst2dist.py test_alleles.tsv test_dist.tsv --outfmt TSV
+
     Done. The dissimilarity matrix has been saved in test_dist.tsv
 
     $ cat test_dist.tsv
@@ -74,6 +76,7 @@ The dissimilarity matrix output is saved to disk with default PHYLIP square matr
 ### PHYLIP NEIGHBOR - UPGMA outfile
 
     $ cp test_dist.phy > infile
+    
     $ phylip neighbor
 
     (..)

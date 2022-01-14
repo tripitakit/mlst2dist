@@ -6,8 +6,6 @@ It converts all occurrences of LNF, NIPH, NIPHEM, PLOT3, PLOT5, ALM, ASM, LOTSC 
 Any call value that isn't an integer is converted to 0.
 The program then calculates a matrix of pairwise dissimilarities using a Hamming Distance modified with correction for missing data (the allele-calls converted to 0s).
 
-The distance algorithm implemented in mlst2dist.py is described in Galpern P, Manseau, M, Hettinga P, Smith K, and Wilson P. (2012) allelematch: an R package for identifying unique multilocus genotypes where genotype error and missing data may be present. Molecular Ecology Resources 12:771-778
-
 The dissimilarity matrix output is saved to disk with default PHYLIP square matrix format, or optional TSV format.
 
 
@@ -112,3 +110,8 @@ The dissimilarity matrix output is saved to disk with default PHYLIP square matr
     S2:0.34722):0.04167,S6:0.38889);
 
 
+### Credits and References
+
+mlst2dist.py has been inspired by https://github.com/tseemann/cgmlst-dists
+
+The distance algorithm implemented in mlst2dist.py is described in Galpern P, Manseau, M, Hettinga P, Smith K, and Wilson P. (2012) allelematch: an R package for identifying unique multilocus genotypes where genotype error and missing data may be present. Molecular Ecology Resources 12:771-778

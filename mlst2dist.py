@@ -2,11 +2,7 @@
 
 """
 mlst2dist.py
-This program converts a chewBBACA alleles table into a dissimilarity matrix.
-It substitutes all strings "LNF", "NIPH", "PLOT3", "PLOT5"  with 0 (zero, integer)
-and removes all "INF-" substrings in allele-calls, then calculates pairwise dissimilarities
-using the Hamming distances corrected for missing data for all the samples pairs.py
-The dissimilarity matrix output is saved to disk with default PHYLIP square matrix format.
+It converts all occurrences of LNF, NIPH, NIPHEM, PLOT3, PLOT5, ALM, ASM, LOTSC in 0, all INF-X in the corresponding X inferred allele-calls and anything else that isn't an integer value into 0; then calculates a matrix of pairwise dissimilarities using the Hamming distances corrected for missing data (the allele-calls converted to 0s). The dissimilarity matrix output is saved to disk with default PHYLIP square matrix format, or optional TSV format
 """
 
 

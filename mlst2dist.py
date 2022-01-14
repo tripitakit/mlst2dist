@@ -2,7 +2,15 @@
 
 """
 mlst2dist.py
-It converts all occurrences of LNF, NIPH, NIPHEM, PLOT3, PLOT5, ALM, ASM, LOTSC in 0, all INF-X in the corresponding X inferred allele-calls and anything else that isn't an integer value into 0; then calculates a matrix of pairwise dissimilarities using the Hamming distances corrected for missing data (the allele-calls converted to 0s). The dissimilarity matrix output is saved to disk with default PHYLIP square matrix format, or optional TSV format
+This program calculate a distance (dissimilarity) matrix from a chewBBACA results_alleles.tsv table (https://github.com/B-UMMI/chewBBACA).
+
+It converts all occurrences of LNF, NIPH, NIPHEM, PLOT3, PLOT5, ALM, ASM, LOTSC in 0 and transform all INF-X in the corresponding X inferred allele-calls.
+Any call value that isn't an integer is converted to 0.
+The program then calculates a matrix of pairwise dissimilarities using a Hamming Distance modified with correction for missing data (the allele-calls converted to 0s).
+
+The distance algorithm implemented in mlst2dist.py is described in Galpern P, Manseau, M, Hettinga P, Smith K, and Wilson P. (2012) allelematch: an R package for identifying unique multilocus genotypes where genotype error and missing data may be present. Molecular Ecology Resources 12:771-778
+
+The dissimilarity matrix output is saved to disk with default PHYLIP square matrix format, or optional TSV format.
 """
 
 

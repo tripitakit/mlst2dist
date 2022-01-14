@@ -9,7 +9,8 @@ The program then calculates a matrix of pairwise dissimilarities using a Hamming
 
 The dissimilarity matrix output is saved to disk with default PHYLIP square matrix format, or optional TSV format.
 
-
+    $ mlst2dist --help
+    
     usage: mlst2dist.py [-h] [-f {PHYLIP,TSV}] input output
 
     Converts a chewBBACA alleles table into a dissimilarity matrix.

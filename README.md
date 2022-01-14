@@ -76,7 +76,7 @@ The dissimilarity matrix output is saved to disk with default PHYLIP square matr
 ### PHYLIP NEIGHBOR - UPGMA outfile
 
     $ cp test_dist.phy > infile
-    
+
     $ phylip neighbor
 
     (..)
@@ -123,12 +123,13 @@ The dissimilarity matrix output is saved to disk with default PHYLIP square matr
 ### PHYLIP NEIGHBOR - UPGMA outtree
 
     $ cat outtree
+
     ((((S1:0.22222,S5:0.22222):0.06945,(S3:0.16667,S4:0.16667):0.12500):0.05556,
     S2:0.34722):0.04167,S6:0.38889);
 
 
 ### Credits and References
 
-mlst2dist.py has been inspired by https://github.com/tseemann/cgmlst-dists
+* mlst2dist.py has been inspired by https://github.com/tseemann/cgmlst-dists
 
-The distance algorithm implemented in mlst2dist.py is described in Galpern P, Manseau, M, Hettinga P, Smith K, and Wilson P. (2012) allelematch: an R package for identifying unique multilocus genotypes where genotype error and missing data may be present. Molecular Ecology Resources 12:771-778
+* The distance algorithm implemented in mlst2dist.py is described in Galpern P, Manseau, M, Hettinga P, Smith K, and Wilson P. (2012) allelematch: an R package for identifying unique multilocus genotypes where genotype error and missing data may be present. Molecular Ecology Resources 12:771-778

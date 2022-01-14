@@ -4,7 +4,7 @@ This program computes a distance (dissimilarity) matrix from a chewBBACA results
 (https://github.com/B-UMMI/chewBBACA).
 
 It converts all occurrences of LNF, NIPH, NIPHEM, PLOT3, PLOT5, ALM, ASM, LOTSC in 0 and transform all INF-X in the corresponding X inferred alleles.
-Any call value that isn't an integer is converted to 0.
+Any other allele-call value that isn't an integer is converted to 0.
 The program then calculates a matrix of pairwise dissimilarities using a Hamming Distance modified with correction for missing data (the allele-calls converted to 0s).
 
 The dissimilarity matrix output is saved to disk with default PHYLIP square matrix format, or optional TSV format.

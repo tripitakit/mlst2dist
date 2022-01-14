@@ -73,8 +73,6 @@ def make_matrix(input, output, outfmt):
     samples, loci, alleles_matrix = transform_alleles_table(
         input)
 
-    print(samples)
-
     nloci = len(loci)
     nsamp = len(samples)
 
@@ -90,16 +88,15 @@ def make_matrix(input, output, outfmt):
 
         if outfmt == "PHYLIP":
             samp_line = f"{samp_a.ljust(10)}"
+
         if outfmt == "TSV":
             samp_line = f"{samp_a}"
 
         for samp_j in range(nsamp):
-            samp_b = samples[samp_j]
-            print(f'Processing {samp_a} - {samp_b}')
             alleles_vector_b = alleles_matrix[samp_j]
-
             n_matches = 0
             n_missing = 0
+
             for x in range(nloci):
                 if (alleles_vector_a[x] == alleles_vector_b[x]):
                     n_matches += 1

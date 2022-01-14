@@ -1,6 +1,7 @@
 # mlst2dist.py
 
-This program computes a distance (dissimilarity) matrix from a chewBBACA (https://github.com/B-UMMI/chewBBACA) results_alleles.tsv table.
+This program computes a distance (dissimilarity) matrix from a chewBBACA results_alleles.tsv table
+(https://github.com/B-UMMI/chewBBACA).
 
 It converts all occurrences of LNF, NIPH, NIPHEM, PLOT3, PLOT5, ALM, ASM, LOTSC in 0 and transform all INF-X in the corresponding X inferred allele-calls.
 Any call value that isn't an integer is converted to 0.

@@ -111,10 +111,7 @@ def pad_mega_index(i):
 
 
 def build_mega_body(distance_matrix, samples):
-    ruler = "[     "
-    for idx in list(range(len(samples))):
-        ruler += f"       {idx + 1}"
-    ruler += " ]\n"
+    ruler = build_ruler(len(samples))
     body = ruler + "[ 1]        \n"
     for i in range(1, len(distance_matrix)):
         row = ""
@@ -122,6 +119,14 @@ def build_mega_body(distance_matrix, samples):
             row += " " + str(distance_matrix[i][j])
         body += f"[{pad_mega_index(i+1)}]  " + row + "        \n"
     return body
+
+
+def build_ruler(n_of_samples):
+    ruler = "[     "
+    for idx in list(range(n_of_samples)):
+        ruler += f"       {idx + 1}"
+    ruler += " ]\n"
+    return ruler
 
 
 def write_outfile(output_fname, header, body):

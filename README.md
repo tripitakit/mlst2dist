@@ -7,7 +7,7 @@ It converts all occurrences of LNF, NIPH, NIPHEM, PLOT3, PLOT5, ALM, ASM, LOTSC 
 Any other allele-call value that isn't an integer is converted to 0.
 The program then calculates a matrix of pairwise dissimilarities using a Hamming Distance modified with correction for missing data (the allele-calls converted to 0s).
 
-The dissimilarity matrix output is saved to disk with default MEGAX lower-left matrix format; optional output in PHYLIP symmetric square and TSV formats.
+The dissimilarity matrix output is saved to disk with default MEGA lower-left matrix format (tested with version 11.0.10) or optional output in PHYLIP symmetric square and TSV formats.
 
 ## Usage
 

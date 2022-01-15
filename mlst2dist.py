@@ -29,7 +29,7 @@ def parse_args():
     parser.add_argument("input", help="chewBBACA alleles table .tsv")
     parser.add_argument("output", help="distance matrix output filename")
     parser.add_argument("-f", "--outfmt", choices=["MEG", "PHY", "TSV"], default="MEG",
-                        help="format options for the output matrix [default: MEG (MEGAX format)]")
+                        help="format options for the output matrix [default: MEG (MEGA format)]")
     args = parser.parse_args()
     return args
 

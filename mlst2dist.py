@@ -111,20 +111,15 @@ def pad_mega_index(i):
 
 
 def build_mega_body(distance_matrix, samples):
-    body = ""
-
     ruler = "[     "
     for idx in list(range(len(samples))):
         ruler += f"       {idx + 1}"
-
     ruler += " ]\n"
-
     body = ruler + "[ 1]        \n"
     for i in range(1, len(distance_matrix)):
         row = ""
         for j in range(i):
             row += " " + str(distance_matrix[i][j])
-
         body += f"[{pad_mega_index(i+1)}]  " + row + "        \n"
     return body
 

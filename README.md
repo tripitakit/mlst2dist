@@ -33,3 +33,7 @@ The dissimilarity matrix output is saved to disk with default MEGA lower-left ma
 * https://github.com/B-UMMI/chewBBACA/blob/master/CHEWBBACA/utils/Extract_cgAlleles.py about handling missing-data 
 
 * The distance algorithm implemented in mlst2dist.py is described in Galpern P, Manseau, M, Hettinga P, Smith K, and Wilson P. (2012) allelematch: an R package for identifying unique multilocus genotypes where genotype error and missing data may be present. Molecular Ecology Resources 12:771-778
+
+### Warnings
+
+This code is in early alpha stage, use at your own risk. Feedabck and contributions are welcome!

@@ -23,7 +23,7 @@ The dissimilarity matrix output is saved to disk with default MEGA lower-left ma
 
     optional arguments:
       -h, --help            show this help message and exit
-      -f {TSV,MEG,PHY}, --outfmt {MEG,PHY,TSV}
+      -f {MEG,PHY,TSV}, --outfmt {MEG,PHY,TSV}
                             format options for the output matrix [default: MEG (MEGA format)]
 
 ### Credits and References

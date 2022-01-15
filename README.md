@@ -36,4 +36,4 @@ The dissimilarity matrix output is saved to disk with default MEGA lower-left ma
 
 ### Warnings
 
-This code is in early alpha stage, use at your own risk. Feedabck and contributions are welcome!
+This code is in early alpha stage, use at your own risk. Feedbacks and contributions are welcome!

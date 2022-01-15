@@ -7,13 +7,13 @@ It converts all occurrences of LNF, NIPH, NIPHEM, PLOT3, PLOT5, ALM, ASM, LOTSC 
 Any other allele-call value that isn't an integer is converted to 0.
 The program then calculates a matrix of pairwise dissimilarities using a Hamming Distance modified with correction for missing data (the allele-calls converted to 0s).
 
-The dissimilarity matrix output is saved to disk with default PHYLIP square matrix format, or optional TSV format.
+The dissimilarity matrix output is saved to disk with default MEGAX lower-left matrix format; optional output in PHYLIP symmetric square and TSV formats.
 
 ## Usage
 
     $ mlst2dist --help
 
-    usage: mlst2dist.py [-h] [-f {PHYLIP,TSV}] input output
+    usage: mlst2dist.py [-h] [-f {MEG,PHY,TSV}] input output
 
     Converts a chewBBACA alleles table into a dissimilarity matrix.
 
@@ -23,115 +23,11 @@ The dissimilarity matrix output is saved to disk with default PHYLIP square matr
 
     optional arguments:
       -h, --help            show this help message and exit
-      -f {PHYLIP,TSV}, --outfmt {PHYLIP,TSV}
-                            format options for the output matrix, default to PHYLIP
-
-
-## Example
-
-### Input alleles table (test_alleles.tsv)
-
-    $ cat test_alleles.tsv
-
-    FILE	G1	G2	G3	G4	G5	G6	G7	G8	G9
-    S1	1	INF-2	3	2	1	5	NIPH	ASM	ALM
-    S2	1	1	1	1	NIPH	5	1	NIPHEM	INF-1
-    S3	INF-1	2	3	4	1	3	INF-1	LOTSC	1
-    S4	1	LNF	2	4	1	3	1	LNF	2
-    S5	1	2	ASM	2	1	3	2	1	LNF
-    S6	2	INF-8	3	PLOT3	PLOT5	3	INF-2	INF-1	INF-1
-
-
-### Dissimilarity matrix (PHYLIP square matrix format)
-
-    $ mlst2dist.py test_alleles.tsv test_dist.phy
-
-    Done. The dissimilarity matrix has been saved in test_dist.phy
-
-    $ cat test_dist.phy
-
-    6
-    S1        	0.0	0.66667	0.44444	0.66667	0.44444	0.88889
-    S2        	0.66667	0.0	0.55556	0.66667	0.88889	0.77778
-    S3        	0.44444	0.55556	0.0	0.33333	0.55556	0.66667
-    S4        	0.66667	0.66667	0.33333	0.0	0.66667	0.88889
-    S5        	0.44444	0.88889	0.55556	0.66667	0.0	0.66667
-    S6        	0.88889	0.77778	0.66667	0.88889	0.66667	0.0
-
-### Dissimilarity matrix (TSV format)
-
-    $ mlst2dist.py test_alleles.tsv test_dist.tsv --outfmt TSV
-
-    Done. The dissimilarity matrix has been saved in test_dist.tsv
-
-    $ cat test_dist.tsv
-
-      S1	S2	S3	S4	S5	S6
-    S1	0.0	0.66667	0.44444	0.66667	0.44444	0.88889
-    S2	0.66667	0.0	0.55556	0.66667	0.88889	0.77778
-    S3	0.44444	0.55556	0.0	0.33333	0.55556	0.66667
-    S4	0.66667	0.66667	0.33333	0.0	0.66667	0.88889
-    S5	0.44444	0.88889	0.55556	0.66667	0.0	0.66667
-    S6	0.88889	0.77778	0.66667	0.88889	0.66667	0.0
-
-
-### PHYLIP NEIGHBOR - UPGMA outfile
-
-    $ cp test_dist.phy > infile
-
-    $ phylip neighbor
-
-    (..)
-    
-    $ cat outfile
-
-      6 Populations
-
-    Neighbor-Joining/UPGMA method version 3.697
-
-
-    UPGMA method
-
-    Negative branch lengths allowed
-
-
-                +------------S1        
-            +---2 
-            !   +------------S5        
-        +---3 
-        !   !      +---------S3        
-      +-4   +------1 
-      ! !          +---------S4        
-    --5 ! 
-      ! +--------------------S2        
-      ! 
-      +----------------------S6        
-
-
-    From     To            Length          Height
-    ----     --            ------          ------
-      5        4          0.04167         0.04167
-      4        3          0.05556         0.09722
-      3        2          0.06945         0.16667
-      2     S1            0.22222         0.38889
-      2     S5            0.22222         0.38889
-      3        1          0.12500         0.22222
-      1     S3            0.16667         0.38889
-      1     S4            0.16667         0.38889
-      4     S2            0.34722         0.38889
-      5     S6            0.38889         0.38889
-
-
-### PHYLIP NEIGHBOR - UPGMA outtree
-
-    $ cat outtree
-
-    ((((S1:0.22222,S5:0.22222):0.06945,(S3:0.16667,S4:0.16667):0.12500):0.05556,
-    S2:0.34722):0.04167,S6:0.38889);
-
+      -f {TSV,MEG,PHY}, --outfmt {TSV,MEG,PHY}
+                            format options for the output matrix [default: MEG (MEGAX format)]
 
 ### Credits and References
 
-* mlst2dist.py has been inspired by https://github.com/tseemann/cgmlst-dists
+* https://github.com/tseemann/cgmlst-dists as the inception of mlst2dist.py
 
 * The distance algorithm implemented in mlst2dist.py is described in Galpern P, Manseau, M, Hettinga P, Smith K, and Wilson P. (2012) allelematch: an R package for identifying unique multilocus genotypes where genotype error and missing data may be present. Molecular Ecology Resources 12:771-778

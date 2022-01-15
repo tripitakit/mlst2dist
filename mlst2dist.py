@@ -10,7 +10,7 @@ The program then calculates a matrix of pairwise dissimilarities using a Hamming
 
 The distance algorithm implemented in mlst2dist.py is described in Galpern P, Manseau, M, Hettinga P, Smith K, and Wilson P. (2012) allelematch: an R package for identifying unique multilocus genotypes where genotype error and missing data may be present. Molecular Ecology Resources 12:771-778
 
-The dissimilarity matrix output is saved to disk with default PHYLIP square matrix format, or optional TSV format.
+The dissimilarity matrix output is saved to disk with default MEGAX lower-left matrix format; optional output in PHYLIP symmetric square and TSV formats.
 """
 
 
@@ -28,7 +28,7 @@ def parse_args():
 
     parser.add_argument("input", help="chewBBACA alleles table .tsv")
     parser.add_argument("output", help="distance matrix output filename")
-    parser.add_argument("-f", "--outfmt", choices=["CSV", "MEG", "PHY"], default="MEG",
+    parser.add_argument("-f", "--outfmt", choices=["MEG", "PHY", "TSV"], default="MEG",
                         help="format options for the output matrix [default: MEG (MEGAX format)]")
     args = parser.parse_args()
     return args
@@ -77,7 +77,7 @@ def write_phylip(distance_matrix, samples, output_fname):
 
 
 def write_tsv(distance_matrix, samples, output_fname):
-    header = "\t".join(samples) + "\n"
+    header = "\t" + "\t".join(samples) + "\n"
     body = render_square_matrix(distance_matrix, samples, len(samples))
     write_outfile(output_fname, header, body)
 
@@ -99,7 +99,7 @@ def write_mega(distance_matrix, samples, output_fname):
 
 
 def build_mega_header(samples):
-    header = f"#mega;\n!Title: <your-title-here>;\n!Format DataType=Distance DataFormat=LowerLeft NTaxa={len(samples)};\n\n"
+    header = f"#mega\n!Title: <your-title-here>;\n!Format DataType=Distance DataFormat=LowerLeft NTaxa={len(samples)};\n\n"
     for i, sample in enumerate(samples):
         header += f"[{pad_mega_index(i+1)}] #{sample}\n"
     header += "\n"

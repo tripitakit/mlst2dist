@@ -53,7 +53,7 @@ def sanitize(line):
     return sanitized_line
 
 
-def transform_alleles_table(input):
+def transform_alleles(input):
     allele_matrix = []
     loci_vector = []
     samples_vector = []
@@ -69,29 +69,85 @@ def transform_alleles_table(input):
     return (samples_vector, loci_vector, allele_matrix)
 
 
-def make_matrix(input, output, outfmt):
-    samples, loci, alleles_matrix = transform_alleles_table(
-        input)
+def write_phylip(distance_matrix, samples, output_fname):
+    nofsamp = len(samples)
+    header = f"{nofsamp}\n"
+    body = render_square_matrix(distance_matrix, samples, nofsamp)
+    write_outfile(output_fname, header, body)
+
+
+def write_tsv(distance_matrix, samples, output_fname):
+    header = "\t".join(samples) + "\n"
+    body = render_square_matrix(distance_matrix, samples, len(samples))
+    write_outfile(output_fname, header, body)
+
+
+def render_square_matrix(distance_matrix, samples, nofsamp):
+    body = ""
+    for i in range(nofsamp):
+        samp_line = f"{samples[i].ljust(10)}"
+        for j in range(nofsamp):
+            samp_line += f"\t{distance_matrix[i][j]}"
+        body += samp_line + "\n"
+    return body
+
+
+def write_mega(distance_matrix, samples, output_fname):
+    header = build_mega_header(samples)
+    body = build_mega_body(distance_matrix, samples)
+    write_outfile(output_fname, header, body)
+
+
+def build_mega_header(samples):
+    header = f"#mega;\n!Title: <your-title-here>;\n!Format DataType=Distance DataFormat=LowerLeft NTaxa={len(samples)};\n\n"
+    for i, sample in enumerate(samples):
+        header += f"[{pad_mega_index(i+1)}] #{sample}\n"
+    header += "\n"
+    return header
+
+
+def pad_mega_index(i):
+    return str(i).rjust(2, " ")
+
+
+def build_mega_body(distance_matrix, samples):
+    body = ""
+
+    ruler = "[     "
+    for idx in list(range(len(samples))):
+        ruler += f"       {idx + 1}"
+
+    ruler += " ]\n"
+
+    body = ruler + "[ 1]        \n"
+    for i in range(1, len(distance_matrix)):
+        row = ""
+        for j in range(i):
+            row += " " + str(distance_matrix[i][j])
+
+        body += f"[{pad_mega_index(i+1)}]  " + row + "        \n"
+    return body
+
+
+def write_outfile(output_fname, header, body):
+    outh = open(output_fname, "w")
+    outh.write(header)
+    outh.write(body)
+    outh.close()
+
+
+def make_matrix(input):
+    samples, loci, alleles_matrix = transform_alleles(input)
 
     nloci = len(loci)
     nsamp = len(samples)
 
-    if outfmt == "PHYLIP":
-        header = f"{nsamp}\n"
-    if outfmt == "TSV":
-        header = "\t" + "\t".join(samples) + "\n"
+    distance_matrix = []
 
-    matrix_output_body_text = ""
     for samp_i in range(nsamp):
-        samp_a = samples[samp_i]
         alleles_vector_a = alleles_matrix[samp_i]
 
-        if outfmt == "PHYLIP":
-            samp_line = f"{samp_a.ljust(10)}"
-
-        if outfmt == "TSV":
-            samp_line = f"{samp_a}"
-
+        samp_line = []
         for samp_j in range(nsamp):
             alleles_vector_b = alleles_matrix[samp_j]
             n_matches = 0
@@ -104,17 +160,23 @@ def make_matrix(input, output, outfmt):
                     if (alleles_vector_a[x] == 0 or alleles_vector_b[x] == 0):
                         n_missing += 1
 
-            corrected_hamming_dist_a_b = round(1 - (
-                n_matches/nloci) + (n_missing/(2*nloci)), 5)
+            corrected_hamming_dist_a_b = round(
+                1 - (n_matches/nloci) + (n_missing/(2*nloci)), 5)
 
-            samp_line += f"\t{corrected_hamming_dist_a_b}"
-        matrix_output_body_text += f"{samp_line}\n"
+            samp_line.append(corrected_hamming_dist_a_b)
 
-    # write the output matrix file
-    outh = open(output, "w")
-    outh.write(header)
-    outh.write(matrix_output_body_text)
-    outh.close()
+        distance_matrix.append(samp_line)
+
+    return(distance_matrix, samples)
+
+
+def dispatch_output(distance_matrix, samples, outfmt, output):
+    if outfmt == "PHY":
+        write_phylip(distance_matrix, samples, output)
+    if outfmt == "TSV":
+        write_tsv(distance_matrix, samples, output)
+    if outfmt == "MEG":
+        write_mega(distance_matrix, samples, output)
 
 
 def validate_infile(input):
@@ -122,14 +184,17 @@ def validate_infile(input):
 
 
 def main():
-    inputs = parse_args()
-    input = inputs.input
-    output = inputs.output
-    outfmt = inputs.outfmt
+    args = parse_args()
+    input_fname = args.input
+    output_fname = args.output
+    output_format = args.outfmt
 
-    if validate_infile(input):
-        make_matrix(input, output, outfmt)
-        print(f"Done. The dissimilarity matrix has been saved in {output}")
+    if validate_infile(input_fname):
+        distance_matrix, samples = make_matrix(input_fname)
+        dispatch_output(distance_matrix, samples, output_format, output_fname)
+
+        print(
+            f"Done. The dissimilarity matrix has been saved in {output_fname}")
 
     else:
         raise RuntimeError('Failed to open the input file.')

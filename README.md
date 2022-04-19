@@ -2,7 +2,7 @@
 
 (https://github.com/B-UMMI/chewBBACA).
 
-It converts all occurrences of LNF, NIPH, NIPHEM, PLOT3, PLOT5, ALM, ASM, LOTSC in 0 and transforms all INF-X in the corresponding X inferred alleles.
+mlst2dist converts all occurrences of LNF, NIPH, NIPHEM, PLOT3, PLOT5, ALM, ASM, LOTSC in 0 and transforms all INF-X in the corresponding X inferred alleles.
 Any other allele-call value left that isn't an integer is converted to 0.
 The program then calculates a matrix of pairwise similarities using a Hamming Distance modified with correction for missing data (the allele-calls converted to 0s).
 
